@@ -1,0 +1,36 @@
+[project]
+
+name = "devops-docker-python-dev-container-image"
+version = "0.1.0"
+description = "dev container dockerfile"
+authors = [
+    { name = "Nicolas Heim" }
+]
+readme = "README.md"
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+
+dev = [
+    "pylint", 
+    "pytest",
+    "devops-tools[dev] @ file:///app/devops-tools",
+    "devops-docker-debian-base-image[dev] @ file:///app/devops-docker-debian-base-image",
+]
+
+run = [
+    "devops-tools @ git+https://github.com/nh-37rtm/devops-tools@master",
+    "devops-docker-debian-base-image @ git+https://github.com/nh-37rtm/devops-docker-debian-base-image@master",
+]
+
+[tool.setuptools.data-files]
+"devops-shared-data/docker-files/python-dev/" = ["resources/*"]
+
+[tool.black]
+line-length = 70
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+
+
