@@ -14,8 +14,8 @@ requires-python = ">=3.11"
 dev = [
     "pylint", 
     "pytest",
-    "devops-tools[dev] @ file:///opt/projects/devops-tools",
-    "devops-docker-debian-base-image[dev] @ file:///opt/projects/devops-docker-debian-base-image",
+    "devops-tools[dev] @ file:///app/devops/devops-tools",
+    "devops-docker-debian-base-image[dev] @ file:///app/devops/devops-docker-debian-base-image",
 ]
 
 run = [

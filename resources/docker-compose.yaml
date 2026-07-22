@@ -1,21 +1,11 @@
-# require to run with docker compose --project-directory .
-# ex : docker compose --project-directory . -f ./indus/docker/dev.docker-compose.yml up
+version: "3.9"
 
-# this file setup the dev-container
 services:
-  dev_container:
+  python-dev:
     build:
-      # context: ${VIRTUAL_ENV}/devops-shared-data/
-      context: .
-      dockerfile: Dockerfile
-      args:
-        # Empty variables just copy current shell variables inside container
-        BUILD_TIME_ENV:
-    image: devops-python-dev
-    container_name: dev_container_python
-    user: "root:root"
-    # for debug
-    #user: "root:root"
+      context: ${VIRTUAL_ENV}/devops-shared-data
+      dockerfile: docker-files/python-dev/Dockerfile
+    image: python-dev:latest
     extra_hosts:
       host.docker.internal: host-gateway
       # require a tunnel on host
@@ -25,17 +15,7 @@ services:
         # to have poetry and pypi credentials inside dev container do not forget to set
         # before running docker-compose up
         RUN_TIME_ENV:
-      
     network_mode: host
     restart: always
-    entrypoint: [ "bash", "-c" ]
-    command: [ "while true; do sleep 1000; echo keeping container up ...; done" ]
-    volumes:
-      - type: bind
-        source: /home/nheim/src/
-        target: /opt/projects
-      - type: volume
-        source: vscode
-        target: /home/app/.vscode-server
-volumes:
-  vscode:
+    depends_on:
+      - debian-base
