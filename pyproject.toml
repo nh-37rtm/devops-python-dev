@@ -25,6 +25,7 @@ run = [
 
 [tool.setuptools.data-files]
 "devops-shared-data/docker-files/python-dev/" = ["resources/*"]
+"devops-shared-data/scripts" = ["scripts/*"]
 
 [tool.black]
 line-length = 70
